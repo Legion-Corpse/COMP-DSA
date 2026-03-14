@@ -1,0 +1,26 @@
+class Solution {
+    public String mergeCharacters(String s, int k) {
+        List<Character> res = new ArrayList<>();
+        int[] win = new int[26];
+        for (char c : s.toCharArray()) {
+            if (win[c - 'a'] > 0) continue;
+            res.add(c);
+            win[c - 'a']++;
+            if (res.size() > k) {
+                char drop = res.get(res.size() - k - 1);
+                win[drop - 'a']--;
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for (char c : res) sb.append(c);
+        return sb.toString();
+    }
+}
+
+
+WRITEUP:
+Using sliding window to maintain the frequency of characters in the result string.
+if win[c]>0, same character sits k distance away, so we skip it.
+when result>k, character at the start of the window is removed from the result and its frequency is decremented.
+
+

@@ -1,0 +1,35 @@
+class Solution {
+    private int[] eval(int[] nums, boolean se) {
+        int ops = 0, hi = Integer.MIN_VALUE, lo = Integer.MAX_VALUE;
+        for (int v : nums) {
+            boolean bad = (v % 2 != 0) == se;
+            if (bad) {
+                ops++;
+                hi = Math.max(hi, v - 1);
+                lo = Math.min(lo, v + 1);
+            } else {
+                hi = Math.max(hi, v);
+                lo = Math.min(lo, v);
+            }
+            se = !se;
+        }
+        return new int[]{ ops, hi - lo };
+    }
+    public int[] makeParityAlternating(int[] nums) {
+        if (nums.length == 1) return new int[]{ 0, 0 };
+
+        Set < Integer > s = new HashSet <> ();
+        for (int n : nums) s.add(n);
+        if (s.size() == 1) return new int[]{ nums.length / 2, 1 };
+
+        int[] r1 = eval(nums, false), r2 = eval(nums, true);
+
+        if (r1[0] == r2[0]) return r1[1] < r2[1] ? r1 : r2;
+        return r1[0] < r2[0] ? r1 : r2;
+    }
+}
+
+WRITEUP:
+Two valid patterns: start with even or start with odd.
+For each element, if its parity doesn't match the expected one, it costs 1 operation
+when a number must change, we need to minimize the final max - min
