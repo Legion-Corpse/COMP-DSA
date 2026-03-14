@@ -2,22 +2,35 @@ import java.io.*;
 import java.util.*;
 
 public class Idiot_Search {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(br.readLine());
-        StringBuilder sb = new StringBuilder();
-        final long MOD = 1_000_000_007L;
 
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st = new StringTokenizer("");
+    static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+
+    static String next() throws IOException {
+        while (!st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine());
+        return st.nextToken();
+    }
+
+    static int nextInt() throws IOException {
+        return Integer.parseInt(next());
+    }
+
+    static final long MOD = 1_000_000_007L;
+
+    public static void main(String[] args) throws IOException {
+        int t = nextInt();
+        StringBuilder sb = new StringBuilder();
         while (t-- > 0) {
-            int n = Integer.parseInt(br.readLine());
+            int n = nextInt();
             int[] left = new int[n + 1];
             int[] right = new int[n + 1];
             int[] parent = new int[n + 1];
 
             for (int i = 1; i <= n; i++) {
-                StringTokenizer st = new StringTokenizer(br.readLine());
-                int l = Integer.parseInt(st.nextToken());
-                int r = Integer.parseInt(st.nextToken());
+                int l = nextInt();
+                int r = nextInt();
                 left[i] = l;
                 right[i] = r;
                 if (l != 0)
@@ -29,9 +42,8 @@ public class Idiot_Search {
 
             long[] up = new long[n + 1];
             boolean[] vis = new boolean[n + 1];
-            Stack<Integer> stk = new Stack<>();
+            Deque<Integer> stk = new ArrayDeque<>();
             stk.push(1);
-
             while (!stk.isEmpty()) {
                 int v = stk.peek();
                 if (!vis[v]) {
@@ -42,19 +54,13 @@ public class Idiot_Search {
                         stk.push(left[v]);
                 } else {
                     stk.pop();
-                    if (left[v] == 0 && right[v] == 0) {
-                        up[v] = 1;
-                    } else {
-                        up[v] = 3 + up[left[v]] + up[right[v]];
-                    }
+                    up[v] = (left[v] == 0 && right[v] == 0) ? 1 : 3 + up[left[v]] + up[right[v]];
                 }
             }
 
             long[] ans = new long[n + 1];
-            ans[0] = 0;
-            Stack<Integer> dfs = new Stack<>();
+            Deque<Integer> dfs = new ArrayDeque<>();
             dfs.push(1);
-
             while (!dfs.isEmpty()) {
                 int v = dfs.pop();
                 ans[v] = (up[v] + ans[parent[v]]) % MOD;
@@ -71,8 +77,8 @@ public class Idiot_Search {
             }
             sb.append('\n');
         }
-
-        System.out.print(sb);
+        pw.print(sb);
+        pw.flush();
     }
 }
 

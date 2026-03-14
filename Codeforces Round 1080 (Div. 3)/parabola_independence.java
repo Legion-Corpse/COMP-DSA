@@ -2,25 +2,35 @@ import java.io.*;
 import java.util.*;
 
 public class parabola_independence {
+
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st = new StringTokenizer("");
+    static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+
+    static String next() throws IOException {
+        while (!st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine());
+        return st.nextToken();
+    }
+
+    static int nextInt() throws IOException {
+        return Integer.parseInt(next());
+    }
+
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(br.readLine());
-        PrintWriter pw = new PrintWriter(System.out);
+        int t = nextInt();
         while (t-- > 0) {
-            int n = Integer.parseInt(br.readLine());
+            int n = nextInt();
             int[] a = new int[n], b = new int[n], c = new int[n];
             for (int i = 0; i < n; i++) {
-                StringTokenizer st = new StringTokenizer(br.readLine());
-                a[i] = Integer.parseInt(st.nextToken());
-                b[i] = Integer.parseInt(st.nextToken());
-                c[i] = Integer.parseInt(st.nextToken());
+                a[i] = nextInt();
+                b[i] = nextInt();
+                c[i] = nextInt();
             }
             List<Integer>[] adj = new List[n];
-            List<Integer>[] radj = new List[n];
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++)
                 adj[i] = new ArrayList<>();
-                radj[i] = new ArrayList<>();
-            }
             for (int i = 0; i < n; i++) {
                 for (int j = i + 1; j < n; j++) {
                     long A = (long) a[i] - a[j];
@@ -41,22 +51,18 @@ public class parabola_independence {
                         }
                     }
                     if (comp) {
-                        if (dir == 1) {
+                        if (dir == 1)
                             adj[j].add(i);
-                            radj[i].add(j);
-                        } else {
+                        else
                             adj[i].add(j);
-                            radj[j].add(i);
-                        }
                     }
                 }
             }
             int[] indeg = new int[n];
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++)
                 for (int v : adj[i])
                     indeg[v]++;
-            }
-            Queue<Integer> q = new LinkedList<>();
+            Queue<Integer> q = new ArrayDeque<>();
             for (int i = 0; i < n; i++)
                 if (indeg[i] == 0)
                     q.add(i);
@@ -65,38 +71,33 @@ public class parabola_independence {
             while (!q.isEmpty()) {
                 int u = q.poll();
                 order[idx++] = u;
-                for (int v : adj[u]) {
-                    indeg[v]--;
-                    if (indeg[v] == 0)
+                for (int v : adj[u])
+                    if (--indeg[v] == 0)
                         q.add(v);
-                }
             }
             int[] len1 = new int[n];
             Arrays.fill(len1, 1);
             for (int i = 0; i < n; i++) {
                 int u = order[i];
-                for (int v : adj[u]) {
-                    if (len1[v] < len1[u] + 1)
-                        len1[v] = len1[u] + 1;
-                }
+                for (int v : adj[u])
+                    len1[v] = Math.max(len1[v], len1[u] + 1);
             }
             int[] len2 = new int[n];
             Arrays.fill(len2, 1);
             for (int i = n - 1; i >= 0; i--) {
                 int u = order[i];
-                for (int v : adj[u]) {
-                    if (len2[u] < len2[v] + 1)
-                        len2[u] = len2[v] + 1;
-                }
+                for (int v : adj[u])
+                    len2[u] = Math.max(len2[u], len2[v] + 1);
             }
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < n; i++) {
                 if (i > 0)
-                    pw.print(' ');
-                pw.print(len1[i] + len2[i] - 1);
+                    sb.append(' ');
+                sb.append(len1[i] + len2[i] - 1);
             }
-            pw.println();
+            pw.println(sb);
         }
-        pw.close();
+        pw.flush();
     }
 }
 

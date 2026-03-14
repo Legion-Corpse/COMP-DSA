@@ -2,11 +2,13 @@ import java.io.*;
 import java.util.*;
 
 public class Absolute_Cinema {
+
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static StringTokenizer st;
+    static StringTokenizer st = new StringTokenizer("");
+    static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 
     static String next() throws IOException {
-        while (st == null || !st.hasMoreTokens())
+        while (!st.hasMoreTokens())
             st = new StringTokenizer(br.readLine());
         return st.nextToken();
     }
@@ -34,9 +36,8 @@ public class Absolute_Cinema {
                 for (int i = 0; i < n - 1; i++)
                     d[i] = f[i + 1] - f[i];
                 long[] a = new long[n];
-                for (int i = 1; i <= n - 2; i++) {
+                for (int i = 1; i <= n - 2; i++)
                     a[i] = (d[i] - d[i - 1]) / 2;
-                }
                 long sum1 = 0, sum2 = 0;
                 for (int i = 1; i <= n - 2; i++) {
                     sum1 += a[i] * i;
@@ -52,7 +53,8 @@ public class Absolute_Cinema {
                 sb.append('\n');
             }
         }
-        System.out.print(sb);
+        pw.print(sb);
+        pw.flush();
     }
 }
 

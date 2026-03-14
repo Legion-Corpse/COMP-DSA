@@ -2,12 +2,14 @@ import java.io.*;
 import java.util.*;
 
 public class Dice_Roll_sequence {
-    static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st = new StringTokenizer("");
+    static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 
     static String next() throws IOException {
         while (!st.hasMoreTokens())
-            st = new StringTokenizer(r.readLine());
+            st = new StringTokenizer(br.readLine());
         return st.nextToken();
     }
 
@@ -25,9 +27,8 @@ public class Dice_Roll_sequence {
                 a[i] = nextInt();
 
             int[] prev = new int[6];
-            for (int j = 1; j <= 6; j++) {
+            for (int j = 1; j <= 6; j++)
                 prev[j - 1] = (a[0] == j) ? 0 : 1;
-            }
 
             for (int i = 1; i < n; i++) {
                 int[] cur = new int[6];
@@ -35,9 +36,8 @@ public class Dice_Roll_sequence {
                     int cost = (a[i] == j) ? 0 : 1;
                     int best = Integer.MAX_VALUE;
                     for (int k = 1; k <= 6; k++) {
-                        if (k != j && k + j != 7) {
+                        if (k != j && k + j != 7)
                             best = Math.min(best, prev[k - 1]);
-                        }
                     }
                     cur[j - 1] = cost + best;
                 }
@@ -49,7 +49,8 @@ public class Dice_Roll_sequence {
                 ans = Math.min(ans, x);
             sb.append(ans).append('\n');
         }
-        System.out.print(sb);
+        pw.print(sb);
+        pw.flush();
     }
 }
 
