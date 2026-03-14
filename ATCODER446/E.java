@@ -1,13 +1,28 @@
 package ATCODER446;
 
+import java.io.*;
 import java.util.*;
 
 public class E {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int M = sc.nextInt();
-        int A = sc.nextInt();
-        int B = sc.nextInt();
+
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st = new StringTokenizer("");
+    static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+
+    static String next() throws IOException {
+        while (!st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine());
+        return st.nextToken();
+    }
+
+    static int nextInt() throws IOException {
+        return Integer.parseInt(next());
+    }
+
+    public static void main(String[] args) throws IOException {
+        int M = nextInt();
+        int A = nextInt();
+        int B = nextInt();
         int total = M * M;
         ArrayList<Integer>[] list = new ArrayList[M];
         for (int i = 0; i < M; i++)
@@ -48,9 +63,14 @@ public class E {
         for (int i = 0; i < total; i++)
             if (vis[i])
                 bad++;
-        System.out.println(total - bad);
+        pw.println(total - bad);
+        pw.flush();
     }
 }
 
-// WRITEUP: BFS backwards from all degenerate states (u=0 or v=0). States
-// reachable from degenerate = "bad". Answer is total states minus bad states.
+// WRITEUP:
+// We run BFS backwards from all degenerate states (u=0 or v=0), propagating
+// through the recurrence f(x,y) = A*f(x-1,y) + B*f(x-1,p).
+// Any state reachable from a degenerate state is "bad" (the sequence
+// degenerates to 0).
+// The answer is the total number of states minus the count of bad states.

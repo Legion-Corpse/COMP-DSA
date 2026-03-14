@@ -56,7 +56,12 @@ public class Absolute_Cinema {
     }
 }
 
-// WRITEUP: Given prefix sums f[], recover the original array a[]. Compute
-// differences d[i]=f[i+1]-f[i], then second differences to get inner elements
-// a[i]=(d[i]-d[i-1])/2. Derive a[0] and a[n-1] from sum constraints. Special
-// case n==2: output f[1] and f[0] directly.
+// WRITEUP:
+// We observe that f[] is a prefix-sum of some symmetric array a[], so we
+// recover a[] by computing finite differences.
+// We take d[i]=f[i+1]-f[i], then second differences give us the inner elements:
+// a[i]=(d[i]-d[i-1])/2.
+// We derive the boundary values a[0] and a[n-1] from the remaining sum
+// constraints.
+// Special case: for n==2 there is only one degree of freedom, so we output f[1]
+// and f[0] directly.

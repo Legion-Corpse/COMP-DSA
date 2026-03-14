@@ -100,8 +100,12 @@ public class parabola_independence {
     }
 }
 
-// WRITEUP: Two parabolas i and j are "comparable" if their difference has no
-// real roots (negative discriminant or A==0, B!=0). Build a DAG: edge j->i
-// means parabola i is always below j. Topological sort then compute longest
-// chain through each node (forward pass len1, backward pass len2). Answer for
-// each node is len1[i] + len2[i] - 1.
+// WRITEUP:
+// We say two parabolas i and j are "comparable" if their difference polynomial
+// has no real roots (negative discriminant, or A==0 and B!=0).
+// We build a DAG where an edge j->i means parabola i is always strictly below
+// parabola j.
+// We topologically sort the DAG using Kahn's BFS, then compute the longest
+// chain through each node using forward and backward DP passes.
+// The final answer for each node i is len1[i] + len2[i] - 1, where len1 is the
+// longest chain ending at i and len2 is the longest chain starting at i.

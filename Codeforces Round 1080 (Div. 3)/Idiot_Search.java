@@ -76,7 +76,11 @@ public class Idiot_Search {
     }
 }
 
-// WRITEUP: For each node, compute up[v] = total traversal cost of its subtree
-// (leaves cost 1, internal nodes cost 3 + left + right subtree). Then push down
-// from root: ans[v] = up[v] + ans[parent[v]], giving the total cost if the
-// search starts at v. Both passes use iterative DFS to avoid stack overflow.
+// WRITEUP:
+// We compute up[v] = total traversal cost of the subtree rooted at v: leaves
+// cost 1 step, internal nodes cost 3 + left subtree + right subtree.
+// We then do a second DFS top-down to push the parent's contribution: ans[v] =
+// up[v] + ans[parent[v]].
+// ans[v] gives the total cost if the binary search starts at node v, summing
+// its own subtree cost with the cost from the rest of the tree.
+// Both passes use iterative DFS to avoid JVM stack overflow on deep trees.

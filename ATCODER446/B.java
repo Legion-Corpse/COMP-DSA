@@ -1,29 +1,49 @@
 package ATCODER446;
 
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class B {
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st = new StringTokenizer("");
+    static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+
+    static String next() throws IOException {
+        while (!st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine());
+        return st.nextToken();
+    }
+
+    static int nextInt() throws IOException {
+        return Integer.parseInt(next());
+    }
+
+    public static void main(String[] args) throws IOException {
+        int n = nextInt();
+        int m = nextInt();
         boolean[] taken = new boolean[m + 1];
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {
-            int l = sc.nextInt();
+            int l = nextInt();
             int chosen = 0;
             for (int j = 0; j < l; j++) {
-                int x = sc.nextInt();
+                int x = nextInt();
                 if (chosen == 0 && !taken[x]) {
                     taken[x] = true;
                     chosen = x;
                 }
             }
-            System.out.println(chosen);
+            sb.append(chosen).append('\n');
         }
+        pw.print(sb);
+        pw.flush();
     }
 }
 
-// WRITEUP: Greedily assign each person their first available (not yet taken)
-// item from their preference list. Use a boolean array to mark taken items.
-// Output the chosen item for each person (0 if none available).
+// WRITEUP:
+// We greedily assign each person the first item they prefer that hasn't already
+// been taken by someone else.
+// We use a boolean array to track which items are claimed, and output the
+// assigned item for each person (0 if none of their preferences were
+// available).

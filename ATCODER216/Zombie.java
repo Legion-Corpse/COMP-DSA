@@ -46,7 +46,9 @@ public class Zombie {
     }
 }
 
-// WRITEUP: Sort zombie positions and gaps. Try all splits: m times place a
-// barrier spanning gaps, K-m times cut individual gaps. Maximize minimum
-// distance from nearest endpoint plus cumulative gap savings, iterating over
-// valid values of m.
+// WRITEUP:
+// We sort zombie positions and compute the gaps between consecutive zombies.
+// We try all splits: using m barrier placements (each covering one or more of
+// the largest available gaps) and K-m individual gap cuts.
+// We maximize the minimum distance from the nearest endpoint plus cumulative
+// gap savings, iterating over all valid values of m.

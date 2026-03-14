@@ -52,7 +52,10 @@ public class G {
     }
 }
 
-// WRITEUP: Track C[x] = sequences ending with x exactly x times in a row. newC
-// for x==1 counts all valid predecessors; for x>1 requires exactly x-1 prior
-// occurrences of x. Maintain running total and update C[x] using stored lists
-// of past newG1 values.
+// WRITEUP:
+// We track C[x] = the number of valid sequences ending with value x exactly x
+// times in a row.
+// For x==1 we sum all valid predecessors (any sequence not ending in x); for
+// x>1 we require exactly x-1 prior consecutive occurrences of x.
+// We maintain a running total and update each C[x] incrementally using stored
+// prefix sums of past newG1 values to avoid recomputing.

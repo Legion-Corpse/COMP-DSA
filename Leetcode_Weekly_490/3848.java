@@ -26,6 +26,8 @@ class Solution {
     }
 }
 
-// WRITEUP: Count digit frequencies of n (c1), then compute the digitorial sum s
-// = sum of factorial of each digit. Count digit frequencies of s (c2). n is a
-// digitorial permutation if c1 == c2 for every digit.
+// WRITEUP:
+// We count the digit frequencies of n into array c1, then compute the
+// digitorial s as the sum of the factorial of each digit of n.
+// We then count the digit frequencies of s into array c2.
+// n is a digitorial permutation if c1 and c2 match for every digit 0 through 9.

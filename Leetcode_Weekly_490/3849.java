@@ -32,6 +32,10 @@ class Solution {
     }
 }
 
-// WRITEUP: Count 0s and 1s in t. Greedily assign bits of s to maximize XOR: if
-// s[i]=='0', use a '1' from t if available (XOR gives 1), else use a '0'. If
-// s[i]=='1', use a '0' from t if available (XOR gives 1), else use a '1'.
+// WRITEUP:
+// We count the 0s and 1s in t to know how many of each bit we have available to
+// XOR with.
+// We then greedily assign bits to maximize XOR: for each bit of s, we always
+// try to pair it with the opposite bit from t to produce a 1.
+// If s[i]=='0' we use a '1' from t if available, else a '0'. If s[i]=='1' we
+// use a '0' from t if available, else a '1'.

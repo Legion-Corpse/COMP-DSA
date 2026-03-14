@@ -38,5 +38,6 @@ public class TotalShop {
     }
 }
 
-// WRITEUP: Read K prices and accumulate their sum mod M. Output the running
-// total modulo M.
+// WRITEUP:
+// We read K prices one by one and accumulate a running total modulo M.
+// We output the running total after all K prices are added.

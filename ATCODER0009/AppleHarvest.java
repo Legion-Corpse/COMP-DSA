@@ -53,6 +53,10 @@ public class AppleHarvest {
     }
 }
 
-// WRITEUP: Sort apple positions. Compute farthest reachable position r = t + k,
-// and delay d from nearest apple minus 1. Binary search for how many apples
-// satisfy a[i] <= r + d.
+// WRITEUP:
+// We sort the apple positions and compute the farthest reachable position r = t
+// + k (time plus any extra steps).
+// We also account for a potential detour d = a[0] - 1, the delay introduced if
+// we go to the nearest apple first.
+// We binary search on the sorted positions to count how many apples satisfy
+// a[i] <= r + d.

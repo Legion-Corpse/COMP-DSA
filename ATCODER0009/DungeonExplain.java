@@ -45,5 +45,8 @@ public class DungeonExplain {
     }
 }
 
-// WRITEUP: Simulate each room. If current HP >= threshold h, defeat monster and
-// gain p HP, else skip (count missed). Total cost = missed rooms * c.
+// WRITEUP:
+// We simulate each room in order: if our current HP s is at or above the
+// monster's threshold h, we defeat it and gain p HP.
+// Otherwise we skip the room and count it as missed.
+// The total gold cost is the number of missed rooms multiplied by c.

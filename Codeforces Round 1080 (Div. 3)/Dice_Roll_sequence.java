@@ -53,7 +53,12 @@ public class Dice_Roll_sequence {
     }
 }
 
-// WRITEUP: DP where state is the face shown at each position (1-6). Cost is 0
-// if face matches the given number, else 1. Transition: previous face k must
-// differ from current j and k+j != 7 (opposite faces). Take the minimum cost
-// over all final faces.
+// WRITEUP:
+// We model this as a DP where the state is the face shown at each position
+// (values 1 through 6).
+// The cost at each step is 0 if the face matches the given sequence value, else
+// 1.
+// The transition constraint is that consecutive faces k and j cannot be equal
+// and cannot sum to 7 (i.e., they cannot be opposite faces on a die).
+// We take the minimum total cost over all n positions and return the minimum
+// over all possible final faces.

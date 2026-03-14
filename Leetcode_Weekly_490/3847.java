@@ -16,6 +16,9 @@ class Solution {
     }
 }
 
-// WRITEUP: Track which player scores each element using a toggle bit `a`. Flip
-// `a` on every odd number encountered and every 6th index. Accumulate p0 and p1
-// accordingly and return p0 - p1.
+// WRITEUP:
+// We track which player (0 or 1) scores each element using a toggle bit `a`.
+// We flip `a` whenever an odd number is encountered, and also flip it at every
+// 6th index to represent group boundaries.
+// We accumulate each element into p0 or p1 based on `a`, then return p0 - p1 as
+// the score difference.

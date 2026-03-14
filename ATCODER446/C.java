@@ -1,25 +1,36 @@
 package ATCODER446;
 
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class C {
+
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st = new StringTokenizer("");
+    static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+
+    static String next() throws IOException {
+        while (!st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine());
+        return st.nextToken();
+    }
+
+    static int nextInt() throws IOException {
+        return Integer.parseInt(next());
+    }
+
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int T = Integer.parseInt(br.readLine());
+        int T = nextInt();
         StringBuilder sb = new StringBuilder();
         for (int t = 0; t < T; t++) {
-            String[] parts = br.readLine().split(" ");
-            int N = Integer.parseInt(parts[0]);
-            int D = Integer.parseInt(parts[1]);
+            int N = nextInt();
+            int D = nextInt();
             int[] A = new int[N];
             int[] B = new int[N];
-            parts = br.readLine().split(" ");
             for (int i = 0; i < N; i++)
-                A[i] = Integer.parseInt(parts[i]);
-            parts = br.readLine().split(" ");
+                A[i] = nextInt();
             for (int i = 0; i < N; i++)
-                B[i] = Integer.parseInt(parts[i]);
+                B[i] = nextInt();
             Deque<int[]> q = new ArrayDeque<>();
             for (int i = 1; i <= N; i++) {
                 q.add(new int[] { i, A[i - 1] });
@@ -43,10 +54,14 @@ public class C {
                 ans += e[1];
             sb.append(ans).append('\n');
         }
-        System.out.print(sb);
+        pw.print(sb);
+        pw.flush();
     }
 }
 
-// WRITEUP: Simulate a queue of (customer, remaining amount) pairs. Each day,
-// add the new customer then serve as many as B can from the front. After D days
-// expire, evict old customers. Sum remaining amounts at the end.
+// WRITEUP:
+// We simulate a queue of (customer, remaining amount) pairs over N days.
+// Each day, we add the new customer then serve as many customers from the front
+// as the daily budget B allows.
+// After D days the subscription expires, so we evict any customers who joined
+// more than D days ago, then sum the remaining unpaid amounts.

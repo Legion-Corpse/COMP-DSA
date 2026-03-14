@@ -52,6 +52,10 @@ public class Stolen_Necklace {
     }
 }
 
-// WRITEUP: Track which group (0 or 1) each gem first appears in. When a
-// duplicate is found in the same group, cut before it to balance both halves.
-// Flip group parity after each cut. Count and output cut positions.
+// WRITEUP:
+// We assign each gem a group (0 or 1) based on which half of the necklace it
+// first appeared in.
+// When a duplicate gem turns up in the same group it currently belongs to, we
+// must cut the necklace before that position to rebalance both halves.
+// We flip the group parity after each cut and collect all cut positions as the
+// final answer.

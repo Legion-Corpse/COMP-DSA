@@ -2,35 +2,41 @@ import java.io.*;
 import java.util.*;
 
 public class Heapify1 {
-    static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-    static StringTokenizer t = new StringTokenizer("");
 
-    static String n() throws IOException {
-        while (!t.hasMoreTokens())
-            t = new StringTokenizer(r.readLine());
-        return t.nextToken();
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st = new StringTokenizer("");
+    static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+
+    static String next() throws IOException {
+        while (!st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine());
+        return st.nextToken();
     }
 
-    static int ni() throws IOException {
-        return Integer.parseInt(n());
+    static int nextInt() throws IOException {
+        return Integer.parseInt(next());
     }
 
     public static void main(String[] args) throws IOException {
-        int c = ni();
-        StringBuilder s = new StringBuilder();
+        int c = nextInt();
+        StringBuilder sb = new StringBuilder();
         while (c-- > 0) {
-            int n = ni();
-            boolean f = true;
+            int n = nextInt();
+            boolean valid = true;
             for (int i = 1; i <= n; i++) {
-                int v = ni();
-                if (f && (v / (v & -v)) != (i / (i & -i)))
-                    f = false;
+                int v = nextInt();
+                if (valid && (v / (v & -v)) != (i / (i & -i)))
+                    valid = false;
             }
-            s.append(f ? "YES\n" : "NO\n");
+            sb.append(valid ? "YES" : "NO").append('\n');
         }
-        System.out.print(s);
+        pw.print(sb);
+        pw.flush();
     }
 }
 
-// WRITEUP: For a min-heap, check v/lowbit(v) == i/lowbit(i) for every node. If
-// any fails, the array is not a valid heap.
+// WRITEUP:
+// We use the key observation that in a valid min-heap, a node's position and
+// value are related via their lowest set bit (lowbit).
+// We check v/lowbit(v) == i/lowbit(i) for every node i; if any node fails this
+// check, we output "No", otherwise "Yes".

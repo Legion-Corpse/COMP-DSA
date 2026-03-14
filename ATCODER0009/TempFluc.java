@@ -73,6 +73,9 @@ public class TempFluc {
     }
 }
 
-// WRITEUP: Build a sparse table for range-min and range-max queries. For each
-// query (l, r), find the largest power-of-2 block and answer in O(1) with two
-// overlapping lookups. Answer is rMax - rMin.
+// WRITEUP:
+// We build a sparse table over the array for both range-min and range-max in
+// O(n log n) preprocessing.
+// For each query (l, r), we find the largest power-of-2 block p that fits and
+// answer in O(1) using two overlapping lookups.
+// The answer for each query is queryMax(l, r) - queryMin(l, r).

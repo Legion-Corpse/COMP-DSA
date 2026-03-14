@@ -91,6 +91,10 @@ public class PlantingFlower {
     }
 }
 
-// WRITEUP: Merge rainy intervals. Binary search for the n-th sunny day. If
-// enough sunny days exist within the rainy range, binary search for the exact
-// day; otherwise extend past the last rainy day.
+// WRITEUP:
+// We first merge all rainy intervals into a minimal set of non-overlapping
+// segments.
+// If enough sunny days exist within the merged range, we binary search inside
+// that range to pinpoint the exact n-th sunny day.
+// Otherwise, the n-th sunny day falls beyond the last rainy interval and we
+// compute it directly from the offset.

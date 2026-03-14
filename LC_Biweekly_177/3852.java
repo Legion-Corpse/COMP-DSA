@@ -15,6 +15,10 @@ class Solution {
     }
 }
 
-// WRITEUP: Build a frequency map, sort unique keys, then scan all pairs to find
-// the first two with different frequencies. Brute force O(n^2) over unique
-// elements is fine since distinct values are bounded.
+// WRITEUP:
+// We build a frequency map to count how often each number appears, then sort
+// the unique keys in ascending order.
+// We scan all pairs (i, j) of unique keys and return the first pair whose
+// frequencies differ.
+// Brute force O(n^2) over unique elements is acceptable here since the number
+// of distinct values is bounded.

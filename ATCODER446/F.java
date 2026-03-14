@@ -71,7 +71,10 @@ public class F {
 
 }
 
-// WRITEUP: Run Dijkstra (minimize max node index) from node 1 to find f[v] =
-// smallest max-index on any path to v. Use a difference array to count valid
-// predecessors per constraint k. If f[k] > k for any k, output -1; else output
-// the prefix sum.
+// WRITEUP:
+// We run Dijkstra from node 1, minimizing the maximum node index on the path
+// rather than the total weight.
+// This gives f[v] = the smallest possible max-index on any path from 1 to v.
+// We then use a difference array over constraints k to count valid predecessor
+// nodes, and for each k, if f[k] > k we output -1, otherwise we output the
+// prefix sum.

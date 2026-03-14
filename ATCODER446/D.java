@@ -23,5 +23,9 @@ public class D {
     }
 }
 
-// WRITEUP: DP with a map: dp[v] = longest chain ending at value v. For each
-// element a, dp[a] = dp[a-1] + 1. Answer is the max dp value seen.
+// WRITEUP:
+// We use a HashMap DP where dp[v] = the length of the longest consecutive chain
+// ending at value v.
+// For each element a we update dp[a] = dp[a-1] + 1 (extending the chain that
+// ends just before a).
+// The answer is the maximum dp value seen across all elements.
